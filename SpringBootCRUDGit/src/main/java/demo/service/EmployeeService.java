@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package demo.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entity.Employee;
-import com.example.demo.repository.EmployeeCrudRepo;
+import demo.entity.Employee;
+import demo.exception.EmptyInputException;
+import demo.repository.EmployeeCrudRepo;
 
 @Service
 public class EmployeeService implements EmployeeServiceInterface {
@@ -18,6 +19,10 @@ public class EmployeeService implements EmployeeServiceInterface {
 
 	@Override
 	public Employee addEmployee(Employee employee) {
+		
+		if(employee.getName().isEmpty() || employee.getName().length() == 0) {
+			throw new EmptyInputException("600","Input Fields are Epmpty") ;
+		}
 		Employee savedEmp = empCrudRepo.save(employee);
 		return savedEmp;
 	}

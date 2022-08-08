@@ -1,8 +1,8 @@
-package com.example.demo.service;
+package demo.service;
 
 import java.util.List;
 
-import com.example.demo.entity.Employee;
+import demo.entity.Employee;
 
 public interface EmployeeServiceInterface {
 
