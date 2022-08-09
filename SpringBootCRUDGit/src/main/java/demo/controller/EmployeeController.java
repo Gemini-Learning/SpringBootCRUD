@@ -29,7 +29,7 @@ public class EmployeeController {
 	
 	Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 	
-	@PostMapping("/save")
+	@PostMapping("/saveupdate")
 	public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee){
 		Employee emp = empService.addEmployee(employee);
 		return new ResponseEntity<>(emp,HttpStatus.CREATED);
@@ -54,11 +54,5 @@ public class EmployeeController {
 		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
 	
-	
-	@PutMapping("/update")
-	public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee){
-		Employee emp = empService.addEmployee(employee);
-		return new ResponseEntity<Employee>(emp,HttpStatus.CREATED);
-	}	
-	
+
 }

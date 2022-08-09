@@ -1,7 +1,8 @@
 package demo.service;
 
-import java.util.ArrayList;
+import java.util.ArrayList;  
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,9 @@ public class EmployeeService implements EmployeeServiceInterface {
 	@Override
 	public Employee addEmployee(Employee employee) {
 		
-		if(employee.getName().isEmpty() || employee.getName().length() == 0) {
+		if(employee.getName().isEmpty() || employee.getName().length() == 0 ||
+				employee.getDept().isEmpty() || employee.getDept().length() == 0)
+		{
 			throw new EmptyInputException("600","Input Fields are Epmpty") ;
 		}
 		Employee savedEmp = empCrudRepo.save(employee);
@@ -29,13 +32,13 @@ public class EmployeeService implements EmployeeServiceInterface {
 
 	@Override
 	public List<Employee> getAll() {
-		ArrayList<Employee> listEmp = (ArrayList<Employee>) empCrudRepo.findAll();
-		return listEmp;
+	return empCrudRepo.findAll();
+		
 	}
 
 	@Override
 	public Employee getById(long empId) {
-		Employee emp =  empCrudRepo.findById(empId).get();
+		Employee emp =  empCrudRepo.findById(empId).orElseThrow( NoSuchElementException::new);
 		return emp;
 	}
 
